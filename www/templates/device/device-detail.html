@@ -1,0 +1,38 @@
+<ion-view view-title="{{titulo_device}}">
+  <ion-nav-bar class="bar-calm">
+    <ion-nav-back-button></ion-nav-back-button>
+  </ion-nav-bar>
+      
+  <ion-content class="padding">
+
+    <button class="button button-block button-balanced" ng-click="showMapDevice()">{{'SHOW_MAP' | translate}}</button>
+
+    <button class="button button-block button-royal" ng-click="showGraphsDevice()">{{'SHOW_ACTIVITY' | translate}}</button>
+
+    <button class="button button-block button-calm" ng-click="setAsDefault()">{{'SELECT_VEHICLE' | translate}}</button>
+
+    <br>
+
+    <ion-list>
+
+      <div ng-show='showNotifications' class="item item-divider">
+      {{'CONFIG_NOTIFICATIONS' | translate}}:
+      </div>
+
+      <ion-item class="item item-config-notification" ng-repeat="notificationConfig in notificationsConfig">       
+
+      <li class="item item-toggle">
+        {{notificationConfig.name}}
+        <label class="toggle toggle-calm">
+          <input type="checkbox" ng-model="notificationConfig.enabled" ng-change="configNotificationChange('{{notificationConfig.id}}', {{notificationConfig.eventType}})">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </li>
+
+    </ion-item>
+    </ion-list>
+
+  </ion-content>
+</ion-view>

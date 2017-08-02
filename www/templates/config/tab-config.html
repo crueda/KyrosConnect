@@ -1,0 +1,49 @@
+<ion-view view-title="Configurar">
+      <ion-nav-bar class="bar-dark"  align-title="center">
+        <ion-nav-back-button></ion-nav-back-button>
+      </ion-nav-bar>
+
+  <ion-content class="padding">
+
+    <ion-list>
+     
+
+
+
+    
+
+  <label class="item item-input item-select">
+      <div class="input-label" translate="LANGUAGE">
+      </div>
+      <select ng-model="dataLanguage.index" ng-options="itemsLanguage.indexOf(item) as item for item in itemsLanguage" ng-change="switchLanguage()">
+      </select>
+  </label>
+
+
+    </ion-list>
+    
+
+
+    
+
+    <br>
+    <button class="button button-block button-assertive" ng-click="logout()"><span translate="CONFIG_LOGOUT"></span></button>
+    <br>
+    <br>
+    <br>
+
+    <div class="row">
+    <div class="col">
+        <div class="text-center">
+            <h5 style="text-align: center;">{{'VERSION' | translate}} {{version}} - {{version_date}}</h5>
+        </div>
+        <div class="text-center">
+            <h6 style="text-align: center;">{{'DEVELOPED' | translate}}: <b>www.kyroslbs.com</b></h6>
+        </div>
+    </div>
+</div>
+
+
+
+  </ion-content>
+</ion-view>

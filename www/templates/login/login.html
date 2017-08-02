@@ -1,0 +1,53 @@
+<ion-view view-title="Kyros LBS" name="login-view">
+
+<ion-nav-bar class="nav-title-slide-ios7" align-title="center">
+    <ion-nav-back-button class="button-icon icon  ion-ios7-arrow-back">
+        {{'BACK' | translate}}
+    </ion-nav-back-button>
+    <ion-nav-buttons side="right">
+        <button class="button ion-wand customButtonIcon" ng-click="clean()">            
+        </button>
+    </ion-nav-buttons>
+</ion-nav-bar>
+
+  <ion-content class="padding">  
+    <div class="list list-inset">
+      <label class="item item-input item-floating-label">
+        <span class="input-label" translate="USER"></span>
+        <input type="text" autocapitalize="off" autocorrect="off" placeholder="{{'USER' | translate}}" ng-model="data.username">
+      </label>
+      <label class="item item-input item-floating-label">
+        <span class="input-label" translate="PASSWORD"></span>
+        <input type="password" autocapitalize="off" autocorrect="off" placeholder="{{'PASSWORD' | translate}}" ng-model="data.password">
+      </label>
+    </div>
+    
+    <ion-list>
+
+ <li class="item item-toggle">
+     
+     <label class="toggle toggle-calm">
+       <input type="checkbox" ng-model="settings.remember" ng-change="remember()">
+       <div class="track">
+         <div class="handle"></div>
+       </div>
+     </label>
+     <span translate="REMEMBER"></span>
+    </li>
+
+    </ion-list>
+
+
+    <br>
+
+    <button class="button button-block button-calm" ng-click="login()"><span translate="LOGIN">
+    </span></button>
+
+<br>
+<br>
+
+    <!--img ng-src="img/mygps-logo.svg" class="center" style="width: 80%;" ng-click="version()"-->
+    <img ng-src="img/kyros_v2.svg" class="center" style="width: 50%;" ng-click="version()">
+
+  </ion-content>
+</ion-view>

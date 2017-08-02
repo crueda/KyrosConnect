@@ -1,0 +1,67 @@
+<ion-view view-title="{{notification.vehicleLicense}}">
+<ion-nav-bar class="bar-assertive nav-title-slide-ios7" align-title="center">
+    <ion-nav-back-button class="button-icon icon  ion-ios7-arrow-back">
+        {{'ALL' | translate}}
+    </ion-nav-back-button>
+    <ion-nav-buttons side="right">
+        <button class="button ion-trash-b customButtonIcon" ng-click="archiveSelectNotification('{{notification.mongoId}}')">
+            
+        </button>
+    </ion-nav-buttons>
+</ion-nav-bar>
+
+
+<ion-header-bar class="bar-subheader" align-title='center'>
+  <button class="button ion-ios-arrow-back" ng-click="goPreviousNotification()"></button>
+  <h1 class="title"><b>{{notification.name}}</b></h1>
+  <button class="button ion-ios-arrow-forward" ng-click="goNextNotification()"></button>            
+</ion-header-bar>
+
+
+  
+
+  <ion-content class="padding has-header has-subheader">
+
+    <img ng-if="trustedHtmlIcon[notification.id] == undefined" ng-src="{{notification.icon}}" class="center" style="width: 100px; height: 100px">
+    <div ng-if="trustedHtmlIcon[notification.id] != undefined" class="iconNotificationDetail" ng-bind-html="trustedHtmlIconEvent"></div>
+
+    <br>
+
+
+    
+    <button class="button button-block button-balanced" ng-click="showMapNotification()">{{'SHOW_MAP' | translate}}</button>
+
+
+    <ion-list>
+
+      <ion-item>
+        <b>Fecha</b> <span class="item-note">{{notification.date}}</span>
+      </ion-item>
+      <ion-item class="item" style="white-space: normal;">
+        <b>Dirección</b> 
+        <br><br><span class="item-note" class="left">{{notification.geocoding}}</span>        
+      </ion-item>
+      <ion-item>
+        <b>Velocidad</b> <span class="item-note">{{notification.speed}}</span>
+      </ion-item>
+      <ion-item>
+        <b>Altitud</b> <span class="item-note">{{notification.altitude}}</span>
+      </ion-item>
+      <ion-item>
+        <b>Coordenadas</b> <span class="item-note">{{notification.latitude}}, {{notification.longitude}}</span>
+      </ion-item>
+
+
+
+    </ion-list>
+
+    <br>
+    
+    <button class="button button-block button-royal" ng-click="showGraphsDevice()">{{'SHOW_ACTIVITY' | translate}}</button>
+
+    <button class="button button-block button-calm" ng-click="setAsDefault()">{{'SELECT_VEHICLE' | translate}}</button>
+
+    
+
+  </ion-content>
+</ion-view>

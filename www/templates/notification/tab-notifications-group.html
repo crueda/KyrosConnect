@@ -1,0 +1,83 @@
+<ion-view view-title="{{'TITTLE_NOTIFICATIONS' | translate}}" cache-view="false">
+
+<ion-nav-bar class="bar-assertive nav-title-slide-ios7" align-title="center">
+    <ion-nav-buttons side="left">        
+      <div class="bubble" style="width: {{width_bubble}}px; top: {{top_bubble}}px;">{{num_notifications}}</div>
+      </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+        <button class="button ion-trash-b customButtonIcon" ng-click="archiveNotifications()">            
+        </button>&nbsp;
+        <button class="button ion-ios-refresh customButtonIcon" ng-click="doRefresh()">            
+        </button>
+    </ion-nav-buttons>
+</ion-nav-bar>
+
+      <div class="bar bar-subheader item-input-inset bar-light">
+        <label class="item-input-wrapper">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="search" ng-model="busqueda" placeholder="{{'SEARCH' | translate}}">
+
+        </label>
+        <button class="button button-clear button-stable ion-chevron-down" ng-model="busquedaCategory" ng-click="filterCategory('')"></button>
+      </div>
+
+
+<ion-content class="has-subheader" ng-controller="DevicesCtrl">
+
+    <ion-refresher pulling-text="{{'PULL_REFRESH' | translate}}" on-refresh="doRefresh()"> </ion-refresher>
+
+    <ion-list>
+    <ion-item class="leyend">
+      <div class="row">
+        <button ng-class="{'col leyendCol text-center pushLeyendCategoryEvent0': busquedaCategory == 'basicas', 'col leyendCol text-center leyendCategoryEvent0' : busquedaCategory != 'basicas' }" ng-model="busquedaCategory" ng-click="filterCategory('basicas')">{{'CATEGORY_BASIC' | translate}}</button>
+      
+      <button ng-class="{'col leyendCol text-center pushLeyendCategoryEvent1': busquedaCategory == 'seguridad', 'col leyendCol text-center leyendCategoryEvent1' : busquedaCategory != 'seguridad' }" ng-model="busquedaCategory" ng-click="filterCategory('seguridad')">{{'CATEGORY_SECURITY' | translate}}</button>
+      
+      <button ng-class="{'col leyendCol text-center pushLeyendCategoryEvent2': busquedaCategory == 'geofencing', 'col leyendCol text-center leyendCategoryEvent2' : busquedaCategory != 'geofencing' }" ng-model="busquedaCategory" ng-click="filterCategory('geofencing')">{{'CATEGORY_GEOFENCING' | translate}}</button>
+      
+      <button ng-class="{'col leyendCol text-center pushLeyendCategoryEvent3': busquedaCategory == 'conduccion', 'col leyendCol text-center leyendCategoryEvent3' : busquedaCategory != 'conduccion' }" ng-model="busquedaCategory" ng-click="filterCategory('conduccion')">{{'CATEGORY_DRIVE' | translate}}</button>
+
+      <button ng-class="{'col leyendCol text-center pushLeyendCategoryEvent4': busquedaCategory == 'otras', 'col leyendCol text-center leyendCategoryEvent4' : busquedaCategory != 'otras' }" ng-model="busquedaCategory" ng-click="filterCategory('otras')">{{'CATEGORY_OTHERS' | translate}}</button>
+
+    </div>
+    </ion-item> 
+
+      <ion-item class="item-remove-animate item-avatar item-icon-right" auto-list-divider auto-list-divider-value="{{notification.vehicleLicense}}" 
+        ng-repeat="notification in notifications | filter: busqueda | filter: busquedaCategory" type="item-text-wrap" href="#/tab/notifications/{{notification.id}}">
+
+
+        <!--img ng-src="{{notification.icon}}" style="width: 38px; height: 38px"-->
+        <!--img ng-src="img/{{notification.id}}.svg" style="width: 55px; height: 55px"-->
+        <!--img ng-src="img/sign_stop.svg"-->
+
+
+        <img ng-if="trustedHtmlIcon[notification.id] == undefined" ng-src="{{notification.icon}}">
+        <div ng-if="trustedHtmlIcon[notification.id] != undefined" class="iconNotification" ng-bind-html="trustedHtmlIcon[notification.id]"></div>
+
+
+
+        <!--div class="icon-container" [innerHTML]="eventIconSVG">
+             </div-->
+
+        <!--svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.41421" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><g fill-rule="nonzero" transform="matrix(1.227483 0 0 1.207261 -7.147999 -6.763805)"><path d="m22.888 58c-1.061 0-2.078-.422-2.828-1.172l-12.887-12.887c-.751-.75-1.172-1.767-1.172-2.828l-.001-18.226c0-1.061.422-2.078 1.172-2.828l12.887-12.888c.75-.75 1.767-1.171 2.829-1.171h18.225c1.06 0 2.078.421 2.828 1.171l12.887 12.888c.75.751 1.172 1.768 1.172 2.829v18.224c0 1.061-.422 2.078-1.172 2.828l-12.887 12.888c-.75.75-1.768 1.172-2.828 1.172z" fill="#dedcd9"/><path d="m6 58h10.989l30.023-52h-41.012z" fill="#fff" opacity=".300003"/><path d="m53 29.563c0-2.531-.954-4.563-5.5-4.563h-3.5v14.001h3v-5h .5c4 0 5.5-1.938 5.5-4.438m-11 2.438c0-4.252-1.963-7.001-5-7.001-3.037 0-5 2.749-5 7.001 0 4.251 1.963 7 5 7 3.037 0 5-2.749 5-7m-11-7.001h-9v3h3v11.001h3v-11.001h3zm-9 9.677c0-3.318-2.284-3.803-4.917-4.433-1.543-.368-1.735-.769-1.809-1.181-.077-.441.211-1.063 1.321-1.063.78 0 1.386.301 1.564.919l2.883-.83c-.549-1.905-2.339-3.089-4.447-3.089-1.557 0-2.715.526-3.516 1.481-.695.827-.965 1.931-.758 3.103.479 2.72 3.848 3.343 4.83 3.579 1.72.411 1.849.866 1.849 1.514 0 .804-.785 1.324-2 1.324-.595 0-1.634-.128-1.921-.982l-2.844.955c.636 1.895 2.417 3.027 4.765 3.027 3.282 0 5-2.175 5-4.324m33-12.203v19.053l-13.474 13.474h-19.052l-13.474-13.473v-19.054l13.473-13.474h19.053zm-18 5.526c-1.578 0-2 2.514-2 4.001 0 1.486.422 4 2 4 1.579 0 2-2.514 2-4 0-1.487-.421-4.001-2-4.001m13 1.5c0 .688-.23 1.501-1.5 1.501h-1.5v-3.001h1.5c1.27 0 1.5.729 1.5 1.5" fill="#de7047"/></g></svg-->
+ 
+
+
+        <!--h2>{{notification.vehicleLicense}}</h2-->
+        <!--p><b>{{notification.name}}</b></p-->
+        <h2><b>{{notification.name}}</b></h2>
+        <p>{{notification.geocoding}}</p>
+        <p>{{notification.date}}</p>
+        <!--i class="icon ion-chevron-right icon-accessory"></i-->
+        <i class="icon ion-ios-arrow-right categoryEvent{{notification.category}}"></i>
+
+
+        <!--ion-option-button class="button-assertive" ng-click="remove(notification)">
+          Archivar
+        </ion-option-button-->
+
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

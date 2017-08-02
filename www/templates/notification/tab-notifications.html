@@ -1,0 +1,75 @@
+<ion-view view-title="{{'TITTLE_NOTIFICATIONS' | translate}}" cache-view="true">
+
+<ion-nav-bar class="bar-assertive nav-title-slide-ios7" align-title="center">
+    <ion-nav-buttons side="left">        
+      <div class="bubble" style="width: {{width_bubble}}px; top: {{top_bubble}}px;">{{num_notifications}}</div>
+      </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+        <button class="button ion-trash-b customButtonIcon" ng-click="archiveNotifications()">            
+        </button>&nbsp;
+        <button class="button ion-ios-refresh customButtonIcon" ng-click="doRefresh()">            
+        </button>
+    </ion-nav-buttons>
+</ion-nav-bar>
+
+      <div class="bar bar-subheader item-input-inset bar-light">
+        <label class="item-input-wrapper">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="search" ng-model="busqueda" placeholder="{{'SEARCH' | translate}}">
+        </label>
+        <button class="button button-clear button-stable ion-close-circled" ng-model="busquedaCategory" ng-click="filterCategory('')"></button>
+      </div>
+
+
+
+<ion-content class="has-subheader" ng-controller="DevicesCtrl">
+
+    <ion-refresher pulling-text="{{'PULL_REFRESH' | translate}}" on-refresh="doRefresh()"> </ion-refresher>
+
+    <!--ion-list can-swipe="true" show-delete="false" type="list-inset"-->
+    <ion-list>
+  
+    <ion-item class="leyend">
+      <div class="row">
+
+      <button ng-class="{'col leyendCol text-center pushLeyendCategoryEvent0': busquedaCategory == 'basicas', 'col leyendCol text-center leyendCategoryEvent0' : busquedaCategory != 'basicas' }" ng-model="busquedaCategory" ng-click="filterCategory('basicas')">{{'CATEGORY_BASIC' | translate}}</button>
+      
+      <button ng-class="{'col leyendCol text-center pushLeyendCategoryEvent1': busquedaCategory == 'seguridad', 'col leyendCol text-center leyendCategoryEvent1' : busquedaCategory != 'seguridad' }" ng-model="busquedaCategory" ng-click="filterCategory('seguridad')">{{'CATEGORY_SECURITY' | translate}}</button>
+      
+      <button ng-class="{'col leyendCol text-center pushLeyendCategoryEvent2': busquedaCategory == 'geofencing', 'col leyendCol text-center leyendCategoryEvent2' : busquedaCategory != 'geofencing' }" ng-model="busquedaCategory" ng-click="filterCategory('geofencing')">{{'CATEGORY_GEOFENCING' | translate}}</button>
+      
+      <button ng-class="{'col leyendCol text-center pushLeyendCategoryEvent3': busquedaCategory == 'conduccion', 'col leyendCol text-center leyendCategoryEvent3' : busquedaCategory != 'conduccion' }" ng-model="busquedaCategory" ng-click="filterCategory('conduccion')">{{'CATEGORY_DRIVE' | translate}}</button>
+
+      <button ng-class="{'col leyendCol text-center pushLeyendCategoryEvent4': busquedaCategory == 'otras', 'col leyendCol text-center leyendCategoryEvent4' : busquedaCategory != 'otras' }" ng-model="busquedaCategory" ng-click="filterCategory('otras')">{{'CATEGORY_OTHERS' | translate}}</button>
+
+      </div>
+    </ion-item> 
+    </ion-list>
+
+    <ion-list>    
+      <ion-item can-swipe="true" show-delete="true" class="item-remove-animate item-avatar item-icon-right"  
+        ng-repeat="notification in notifications | filter: busqueda | filter: busquedaCategory" type="item-text-wrap" href="#/tab/notifications/{{notification.id}}">
+<!--ion-delete-button class="ion-minus-circled"></ion-delete-button-->
+        <img ng-if="trustedHtmlIcon[notification.id] == undefined" ng-src="{{notification.icon}}">
+        <div ng-if="trustedHtmlIcon[notification.id] != undefined" class="iconNotification" ng-bind-html="trustedHtmlIcon[notification.id]"></div>
+        <h2>{{notification.vehicleLicense}}</h2>
+        <p>{{notification.name}}</p>
+        <p>{{notification.date}}</p>
+
+        <!--i class="icon ion-chevron-right icon-accessory"></i-->
+
+        <i class="icon ion-ios-arrow-right icon-accessory categoryEvent{{notification.category}}"></i>
+
+
+        <!--ion-option-button class="button-assertive" ng-click="remove(notification)">
+          Archivar
+        </ion-option-button-->
+
+
+      </ion-item> 
+
+    </ion-list>
+
+  </ion-content>
+</ion-view>

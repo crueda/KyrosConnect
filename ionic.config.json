@@ -1,0 +1,13 @@
+{
+  "name": "Kyros",
+  "app_id": "48657e9b",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*",
+    "!www/**/*.map"
+  ]
+}

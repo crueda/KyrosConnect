@@ -1,0 +1,48 @@
+ionic serve --lab
+ionic build android
+ionic build browser
+ionic build ios
+
+
+/Users/Carlos/android-sdk/platform-tools/adb kill-server
+/Users/Carlos/android-sdk/platform-tools/adb devices
+
+chrome://inspect
+
+---
+SUBIR APK:
+
+scp /Users/Carlos/Workspace/Kyros/KyrosMyPush/platforms/android/build/outputs/apk/android-debug.apk root@192.168.28.136:/var/www/files/app/apk/mypush
+scp /Users/Carlos/Workspace/Kyros/KyrosMyPush/platforms/android/build/outputs/apk/android-debug.apk root@192.168.28.137:/var/www/files/app/apk/mypush
+
+---
+SUBIR CHANGELOG:
+gulp gen-changelog
+scp /Applications/MAMP/htdocs/webkyrosapp/changelog.html root@192.168.29.4:/home/kyros/www/files/app
+
+
+--
+SUBIR manual de usuario:
+scp /Volumes/Macintosh HD/Users/Carlos/DeimosCloud/Manuales/KyrosAPP/KyrosApp_1_0.docx root@192.168.29.4:/home/kyros/www/files/app
+scp ./Users/Carlos/DeimosCloud/Manuales/KyrosAPP/KyrosApp_1_0.docx root@192.168.29.4:/home/kyros/www/files/app
+scp KyrosApp_1_0.docx root@192.168.29.4:/home/kyros/www/files/app
+
+
+
+---
+arrancar el servidor en background
+screen -d -m -L ionic serve --nolivereload --nobrowser
+
+
+---
+GENERAR APK de produccion
+
+keytool -genkey -v -keystore kyrosMyPush-key.keystore -alias mypush -keyalg RSA -keysize 2048 -validity 10000
+
+
+cordova build android --release
+
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore kyrosMyPush-key.keystore /Users/Carlos/Workspace/Kyros/KyrosMyPush/platforms/android/build/outputs/apk/android-release-unsigned.apk kyrosMyPush
+
+/Users/Carlos/android-sdk/build-tools/23.0.1/zipalign -v 4 /Users/Carlos/Workspace/Kyros/KyrosMyPush/platforms/android/build/outputs/apk/android-release-unsigned.apk kyrosMyPush.apk

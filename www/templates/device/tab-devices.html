@@ -1,0 +1,32 @@
+<ion-view view-title="{{'TITTLE_DEVICES' | translate}}">
+ 	<ion-nav-bar class="bar-calm"  align-title="center">
+  </ion-nav-bar>
+
+<!--ion-content>
+    <ion-list>
+        <ion-tree-list items="tasks" collapsed="true"></ion-tree-list>
+    </ion-content>
+</ion-view-->
+
+
+  <ion-header-bar class="bar-subheader item-input-inset">
+    <label class="item-input-wrapper">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="search" placeholder="{{'ENTER_LICENSE' | translate}}" ng-change="search()" ng-model="data.search">
+    </label>
+    <button class="button button-clear button-stable ion-chevron-down">
+      
+    </button>      
+  </ion-header-bar>
+  <ion-content>
+
+  <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="device in data.devices | orderBy:'name_order'" type="item-text-wrap" ng-click="selectDevice(device);">
+    
+    <img ng-src="img/devices/{{device.icon_real_time}}" onerror="this.src='img/kyros.svg'">
+    <h2>{{device.vehicle_license}}</h2>
+    <p>{{device.alias}}</p>
+    <i class="icon ion-chevron-right icon-accessory"></i>
+
+  </ion-item>
+
+</ion-content>

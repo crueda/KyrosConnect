@@ -1,0 +1,83 @@
+<ion-view view-title="MyPush">
+
+<ion-nav-bar class="nav-title-slide-ios7" align-title="center">
+    <ion-nav-back-button class="button-icon icon  ion-ios7-arrow-back">
+        <button class="button button-positive button-clear no-animation"
+                  ng-click="startApp()" ng-show="!slideIndex">
+            Saltar Intro
+          </button>
+          <button class="button button-positive button-clear no-animation"
+                  ng-click="previous()" ng-show="slideIndex > 0">
+            Atras
+          </button>        
+    </ion-nav-back-button>
+    <ion-nav-buttons side="right">
+        <button class="button button-positive button-clear no-animation"
+                  ng-click="next()" ng-show="slideIndex != 3">
+            Siguiente
+          </button>
+          <button class="button button-positive button-clear no-animation"
+                  ng-click="startApp()" ng-show="slideIndex == 3">
+            ¡Comenzar!
+          </button>
+    </ion-nav-buttons>
+</ion-nav-bar>
+
+
+
+        <ion-slide-box on-slide-changed="slideChanged(index)">
+          <ion-slide style="background-color:#11c1f3">
+         
+
+            <h3>Bienvenido a MyPush !</h3>
+            <br>
+            <div id="img1">
+              <img ng-src="img/intro/intro1.png" class="center" style="width: {{imgWidth}}px; height: {{imgHeight}}px">
+            </div>
+            <br>  
+            <p>
+              Recibe y consulta las <b>notificaciones push</b> de todos tus <b>dispositivos</b> en MyPush
+            </p>
+
+          </ion-slide>
+
+          <ion-slide style="background-color:#cf3333">
+            <h3>Notificaciones</h3>
+            <br>
+            <div id="img2">
+              <img ng-src="img/intro/intro2.png" class="center" style="width: {{imgWidth}}px; height: {{imgHeight}}px">
+            </div>   
+            <br>                     
+            <p>
+              Consulta y configura todas tus notificaciones MyPush de forma <b>rápida</b> y <b>sencilla</b> 
+            </p>
+          </ion-slide>
+
+          <ion-slide style="background-color:#f7c90b">
+            <h3>Localización</h3>
+            <br>
+            <div id="img3">
+              <img ng-src="img/intro/intro3.png" class="center" style="width: {{imgWidth}}px; height: {{imgHeight}}px">
+            </div>   
+            <br>                     
+            <p>
+              Comprueba en tiempo real las <b>posiciones</b> y actividad de toda tu <b>flota</b>
+            </p>
+          </ion-slide>
+
+          <ion-slide style="background-color:#33cd5f">
+            <h3>Actividad</h3>
+            <br>
+            <div id="img4">
+              <img ng-src="img/intro/intro4.png" class="center" style="width: {{imgWidth}}px; height: {{imgHeight}}px">
+            </div>   
+            <br>                     
+            <p>
+              Analiza tus <b>informes</b> y <b>gráficos</b> de actividad 
+            </p>
+          </ion-slide>
+        </ion-slide-box>
+
+
+
+      </ion-view>
